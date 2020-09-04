@@ -11,7 +11,7 @@ export default function Weather({ temp }) {
     );
 }
 
-Weather.propTypes = {
+Weather.PropTypes = {
     temp: PropTypes.number.isRequired
 };
 
