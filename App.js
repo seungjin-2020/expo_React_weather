@@ -5,8 +5,7 @@ import * as Location from "expo-location";
 import axios from "axios";
 import Weather from "./Weather";
 
-
-const API_KEY = "0fd7a839cc3d5c446f711067d1fcebb6";
+const API_KEY = "241051bf13976dd3ddf8b8d9f247255e";
 
 export default class extends React.Component {
   state = {
@@ -21,8 +20,6 @@ export default class extends React.Component {
     } = await axios.get(
       `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${API_KEY}&units=metric`
     );
-    console.log(data);
-    
     this.setState({
       isLoading: false,
       condition: weather[0].main,
@@ -31,14 +28,13 @@ export default class extends React.Component {
   };
   getLocation = async () => {
     try {
-      
       await Location.requestPermissionsAsync();
       const {
-        coords: { latude, longitude }
+        coords: { latitude, longitude }
       } = await Location.getCurrentPositionAsync();
       this.getWeather(latitude, longitude);
-    } catch (error){
-        Alert.alert("Can`t find you.", "So sad");
+    } catch (error) {
+      Alert.alert("Can't find you.", "So sad");
     }
   };
   componentDidMount() {
@@ -52,5 +48,4 @@ export default class extends React.Component {
       <Weather temp={Math.round(temp)} condition={condition} />
     );
   }
-  
 }
