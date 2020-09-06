@@ -19,6 +19,7 @@ export default class extends React.Component {
       }
     } = await axios.get(
       `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${API_KEY}&units=metric`
+      
     );
     this.setState({
       isLoading: false,
@@ -33,6 +34,7 @@ export default class extends React.Component {
         coords: { latitude, longitude }
       } = await Location.getCurrentPositionAsync();
       this.getWeather(latitude, longitude);
+      console.log(latitude, longitude);
     } catch (error) {
       Alert.alert("Can't find you.", "So sad");
     }
